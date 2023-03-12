@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head>
+        {% load static %}
+        <meta charset="utf-8"/>
+        <link rel="favicon" href="{% static 'favicon.ico' %}"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>查看图片{{ picture.id }}</title>
+    </head>
+    <body>
+        <p>Hello! You are looking at the detail of picture {{ picture.id }} <em>{{ picture.picture_text}}</em>.</p>
+        <img src="{{ picture.picture.url }}" alt="{{ picture.picture_text }}" title="{{ picture.picture_text }}"/>
+        <a href="{{ picture.picture.url }}" download="{{ picture.name }}">Download the picture here(about 30KB or 60KB).</a>
+        <form action="{% url 'funnymanga:comment' picture.id %}" method="post">
+            {% csrf_token %}
+            {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+            <label for="comment">Write a funny comment:</label>
+            <textarea id="comment" name="comment" required="required" title="Comment here right now!" ></textarea>
+            <button type="submit">Submit</button>   
+        </form>
+        {% for comment in picture.comment_set.all reversed %}
+            <p>{{ comment }}</p>
+        {% empty %}
+        <p>Here are no comments. Comment first now!</p>
+        {% endfor %}
+    </body>
+</html>

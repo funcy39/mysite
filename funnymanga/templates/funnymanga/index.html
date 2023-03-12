@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head>
+        {% load static %}
+        <meta charset="utf-8"/>
+        <link rel="shortcut icon" href="{% static 'favicon.ico' %}"/>
+        <link rel="stylesheet" href="{% static 'funnymanga/style.css'%}">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>观看有趣的漫画</title>
+    </head>
+    <body>
+        <header><h1 style="text-align:center">Funnymanga</h1></header>
+        <nav>
+            <a href="../">Menu</a>
+            <a href="/polls/">Polls index</a>
+            <a href="#">Funnymanga</a>
+        </nav>                
+        <main> 
+            <aside>
+                {% if latest_picture_list %}
+                    {% for picture in latest_picture_list %}
+                    <ul>
+                        <li><a href="{% url 'funnymanga:detail' picture.id %}">
+                            <img src="{{ picture.picture.url }}" style="width: 200px;float: left;">
+                            </a>
+                        </li>
+                    </ul>
+                    {% endfor %}
+                {% else %}
+                    <p>No pictures are availible.</p>
+                {% endif %}
+            </aside>
+            <article>                
+                <h2 style="margin-top: 0;">你知道吗？</h2>
+                <p>以上所有图片均是用电脑绘图软件手绘，绘成时间有一个星期之多，历史悠久，
+                总投资成本超过竟0元，网站估价0.0元起价。</p>
+                <p>如果想为本网站投资，请<a href="mailto:howardqiuhao@qq.com?Subject=我方企业愿为本网站投资">联系管理员</a>，
+                在开学之前入股还可以每月多加0.00元分红。</p>
+            </article>
+        </main>
+    <footer>版权 ©2023 Howard</footer>   
+    </body>
+</html>

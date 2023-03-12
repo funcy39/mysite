@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        {% load static %}
+        <meta charset="utf-8">
+        <title>选择投票问题</title>
+        <link rel="stylesheet" href="{% static 'polls/style.css' %}">
+        <link rel="shortcut icon" href="{% static 'favicon.ico'%}">
+    </head>
+    <body>
+        <div class="container">
+            <div class="header">
+                <h1 style="text-align:center">Polls index</h1></div>
+                
+            <div class="topnav">
+                <a href="../">Menu</a>
+                <a href="#">Polls index</a>
+                <a href="/funnymanga/">Funnymanga</a>
+            </div>  
+                
+            <div class="menu" style="float: left;padding-right: 25px;">
+                {% if latest_question_list %}
+                <ul>
+                    {% for question in latest_question_list %}
+                        <li><a href="{% url 'polls:detail' question.id %}">{{ question.question_text }}</a></li>
+                    {% endfor %}
+                </ul>
+                {% else %}
+                    <p>No polls are available.</p>
+                {% endif %}       
+            </div>
+            <div class="content" style="float: left;">
+                <h1 style="margin-top: 0;">你知道吗？</h1>
+                <p>中国江苏某六年级学生通过Django网络框架在个人电脑上运行发布个人网站，以下是他使用的工具：</p>
+                <ul>
+                    <li>一个脑子</li>
+                    <li>一双手</li>
+                    <li>一台能上网的Windows电脑</li>
+                </ul>
+                <p>如果您意外知道了这个人所使用的其他工具，
+                    请致电123-456-7890或<a href="mailto:howardqiuhao@qq.com?Subject=数据泄露了">联系管理员</a>，我们会派人前往处理数据泄露事件。</p>
+            </div>
+            <footer>版权 ©2023 Howard</footer>
+        </div>
+        
+    </body>
+</html>
